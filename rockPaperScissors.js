@@ -77,35 +77,31 @@ function createButtonListeners() {
     //Create listeners
     btnRock.addEventListener('click', () => {
         let playerChoice = 'rock'
-       matchResult = `You ${playRound(playerChoice, compChoice)}`;
-        
+        let compChoice = getCompChoice();
+        matchResult = `Computer chose ${compChoice}\n 
+                    You ${playRound(playerChoice, compChoice)}`;
+        updateScores(matchResult);
     })
 }
 
-function game(numRounds) {
+function game() {
     playerScore = 0;
     compScore = 0;
     createButtonListeners();
+    const screen = document.querySelector('#Results h2')
+    screen.textContent = "Make your choice"
     while (playerScore != 5 && compScore != 5) {
-        const screen = document.querySelector('#Results')
-        let input = prompt("What are you picking?").toLowerCase();
-        let playerChoice = input.toLowerCase();
-        let compChoice = getCompChoice(); 
-        console.log(`Computer chose ${compChoice}`)
-        console.log(`You ${playRound(playerChoice, compChoice)}`);
     }
-    console.log(`Player Score: ${playerScore}`);
-    console.log(`Computer $Score: ${compScore}`);
     if(playerScore > compScore){
-        console.log("You have bested the Machine!");
+        screen.textContent="You have bested the Machine!";
     }
     else if(compScore > playerScore){
-        console.log("You Lost... loser")
+        screen.textContent = "You Lost... loser"
     }
     
     
 }
 
-createButtonListeners()
+game()
 
 
