@@ -1,5 +1,6 @@
 let playerScore = 0;
 let compScore = 0;
+
 // Take the two choices and select a winner
 function playRound(playerChoice, compChoice) {
     if (playerChoice === "rock") {
@@ -57,11 +58,36 @@ function getCompChoice() {
     return choices[i];
 }
 
+function updateScores(matchResult){
+       let playerScoreText = document.querySelector('#PlayerScore');
+       let cpuScoreText = document.querySelector('#CompScore');
+       let screenText = document.querySelector("#Results h2")
+       
+       playerScoreText.textContent = `Player: ${playerScore}`;
+       cpuScoreText.textContent = `CPU: ${compScore}`;
+       screenText.textContent = matchResult;
+}
+
+function createButtonListeners() {
+    //get references to buttons
+    const btnRock = document.querySelector('#btnRock');
+    const btnPaper = document.querySelector('#btnRock');
+    const btnScissor = document.querySelector('#btnRock');
+
+    //Create listeners
+    btnRock.addEventListener('click', () => {
+        let playerChoice = 'rock'
+       matchResult = `You ${playRound(playerChoice, compChoice)}`;
+        
+    })
+}
+
 function game(numRounds) {
     playerScore = 0;
     compScore = 0;
-    for (let index = 0; index < numRounds; index++) {
-        console.log(`Round ${index + 1}`);
+    createButtonListeners();
+    while (playerScore != 5 && compScore != 5) {
+        const screen = document.querySelector('#Results')
         let input = prompt("What are you picking?").toLowerCase();
         let playerChoice = input.toLowerCase();
         let compChoice = getCompChoice(); 
@@ -79,7 +105,7 @@ function game(numRounds) {
     
     
 }
-let rounds = parseInt(prompt("How many rounds?"));
-game(rounds);
+
+createButtonListeners()
 
 
